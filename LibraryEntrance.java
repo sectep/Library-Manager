@@ -28,6 +28,7 @@ public class LibraryEntrance {
 
     // method, which initializes the option, based on the choice.
     private void doOption(int what) {
+        System.out.println();
         switch (what) {
             case 1:
                 ISBN = askId();
@@ -65,6 +66,7 @@ public class LibraryEntrance {
 
     // method, which displays the menu.
     private void display() {
+        System.out.println("===LIBRARY MANAGMENT");
         System.out.println("1. Add book.");
         System.out.println("2. Find book.");
         System.out.println("3. Update book's quantity.");
@@ -75,32 +77,32 @@ public class LibraryEntrance {
 
     // method, which asks for book's ID.
     private String askId() {
-        System.out.print("Write id of the book: ");
+        System.out.print("Write id: ");
         return console.nextLine();
     }
 
     // method, wich asks for book's name.
     private String askTitle() {
-        System.out.print("Write the title of the book: ");
+        System.out.print("Write the title: ");
         return console.nextLine();
     }
 
     // method, which asks for book's author.
     private String askAuthor() {
-        System.out.print("Write the author of the book: ");
+        System.out.print("Write the author: ");
         return console.nextLine();
     }
 
     // method, which asks for the genre.
     private String askGenre() {
-        System.out.print("Write the genre of the book: ");
+        System.out.print("Write the genre: ");
         genre = console.nextLine();
         return genre.toUpperCase();
     }
 
     // method, which asks for the book quantity.
     private String askQuantity() {
-        System.out.print("Write the quantity of books avaible: ");
+        System.out.print("Write the quantity: ");
         if (console.hasNextInt()) {
             number = console.nextInt();
             console.nextLine();

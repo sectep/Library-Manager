@@ -15,6 +15,68 @@ public class LibraryManager {
 
     }
 
+    // method, which updated the number of books.
+    public static void updateNum(String ISBN, String num) {
+        readToArray();
+        update(ISBN, num);
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("librarymanager\\library.txt"))) {
+            for (String l : lines)
+                out.write(l + "\n");
+        } catch (IOException exc) {
+            System.out.println("Exception occurred while file was changing quantities.");
+        }
+    }
+
+    // a metthod, which reads the book information, based on he ID.
+    public static void readData(String ISBN) {
+        try (BufferedReader in = new BufferedReader(new FileReader("librarymanager\\library.txt"))) {
+
+            // read until the end.
+            while ((line = in.readLine()) != null) {
+                if (line.startsWith("Id: ")) {
+
+                    if (line.substring(4).equals(ISBN)) {
+                        for (int i = 0; i < 4; i++)
+                            System.out.println(in.readLine());
+
+                        return;
+                    }
+                }
+            }
+        } catch (IOException exc) {
+            System.out.println("An error has occurred, while data was reading");
+        }
+    }
+
+    // method, which removes the book, based on ISBN
+    public static void removeBook(String ISBN) {
+        readToArray();
+        if (idExists(ISBN)) {
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).startsWith("Id: ") && lines.get(i).substring(4).equals(ISBN)) {
+
+                    for (int j = 0; j < 6; j++) {
+                        lines.remove(i);
+                    }
+                    updateFile();
+                    System.out.println("Book with ID " + ISBN + " is removed successfully.");
+                    return;
+                }
+            }
+        }
+        System.out.println("ID doesnt exist!");
+    }
+
+    // method, which prints all lines.
+    public static void showAll() {
+        readToArray();
+        System.out.println("===LIBRARY===");
+        for (String l : lines) {
+            System.out.println(l);
+        }
+    }
+
     // method, which writes binary data into 'library.txt'.
     private static void writeData(String ISBN, String name, String author, String genre, String number) {
 
@@ -27,11 +89,12 @@ public class LibraryManager {
                 out.write("Author: " + author + "\n");
                 out.write("Genre: " + genreChooser(genre) + "\n");
                 out.write("Avaible: " + number + "\n");
-                out.write("\n");
+                out.write("---\n");
+                System.out.println("The book has been saved successfully.");
                 return;
             }
         } catch (IOException exc) {
-            System.out.println("Exception has occurred while method was writing binary data.");
+            System.out.println("Exception has occurred while method was writing data.");
         }
         System.out.println("ID already exists.");
     }
@@ -54,45 +117,17 @@ public class LibraryManager {
         return false;
     }
 
-    // a metthod, which reads the book information, based on he ID.
-    public static void readData(String ISBN) {
-        try (BufferedReader in = new BufferedReader(new FileReader("librarymanager\\library.txt"))) {
-
-            // read until the end.
-            while ((line = in.readLine()) != null) {
-                if (line.startsWith("Id: ")) {
-                    System.out.println("\n" + line);
-                    for (int i = 0; i < 4; i++) {
-                        System.out.println(in.readLine());
-                    }
-                }
-            }
-        } catch (IOException exc) {
-            System.out.println("An error has occurred, while binary data was reading");
-        }
-    }
-
-    // method, which updated the number of books.
-    public static void updateNum(String ISBN, String num) {
-        update(ISBN, num);
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("librarymanager\\library.txt"))) {
-            for (String l : lines) {
-                out.write(l);
-            }
-        } catch (IOException exc) {
-            System.out.println("Exception occurred while file was changing quantities.");
-        }
-    }
-
-    // methodm which removes the number from array.
+    // method, which removes the number from array.
     private static void update(String ISBN, String num) {
 
         // iterate through array list.
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).startsWith("Id: ") && lines.get(i).substring(4).equals(ISBN)) {
-                for (int j = 0; j < 5; j++) {
-                    if (lines.get(i).startsWith("Avaible: ")) {
-                        lines.set(i, "Avaible: " + num);
+                // change the quantiny in the next loop.
+                for (int j = i; j < lines.size(); j++) {
+                    if (lines.get(j).startsWith("Avaible: ")) {
+                        lines.set(j, "Avaible: " + num);
+                        System.out.println("Book's information has been updated.");
                         return;
                     }
                 }
@@ -119,53 +154,27 @@ public class LibraryManager {
 
             // read until the end.
             while ((line = in.readLine()) != null) {
-                if (line.substring(3).equals(ISBN))
-                    return true;
+                if (line.startsWith("Id: ")) {
+                    if (line.substring(4).equals(ISBN)) {
+                        return true;
+                    }
+                }
             }
         } catch (IOException exc) {
-            System.out.println("An error has occurred, while binary data was reading");
+            System.out.println("An error has occurred, while data was reading");
         }
         return false;
     }
 
-    // method, which removes the book, based on ISBN
-    public static void removeBook(String ISBN) {
-        if (idExists(ISBN)) {
-
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).startsWith("ID: ") && lines.get(i).substring(4).equals(ISBN)) {
-                    for (int j = 0; j < 6; j++) {
-                        lines.remove(i);
-                        updateFile();
-                    }
-                    return;
-                }
-            }
-        }
-        System.out.println("ID doesnt exist!");
-    }
-
     // method, which updates the file information.
     private static void updateFile() {
-        readToArray();
         try (BufferedWriter out = new BufferedWriter(new FileWriter("librarymanager\\library.txt"))) {
             for (String l : lines) {
-                out.write(l);
+                out.write(l + "\n");
             }
         } catch (IOException exc) {
             System.out.println("The process of rewriting data  has been interrupted.");
 
-        }
-    }
-
-    // method, which prints all lines.
-    public static void showAll() {
-        for (String l : lines) {
-            if (l == null) {
-                System.out.println("The file is empty.");
-                return;
-            }
-            System.out.println(l);
         }
     }
 }

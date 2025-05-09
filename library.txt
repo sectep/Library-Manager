@@ -1,6 +1,60 @@
-Id: 19282732
-Name: Aew
-Author: Endreq
-Genre: SCIENCE
-Avaible: 282
-
+Id: 978-0-13-468599-1
+Name: Effective Java
+Author: Joshua Bloch
+Genre: PROGRAMMING
+Avaible: 4
+---
+Id: 978-1-49-195035-7
+Name: Clean Architecture
+Author: Robert C. Martin
+Genre: SOFTWARE
+Avaible: 2
+---
+Id: 978-0-26-203384-8
+Name: Introduction to Algorithms
+Author: Thomas H. Cormen
+Genre: ALGORITHMS
+Avaible: 5
+---
+Id: 978-0-59-600920-5
+Name: Head First Java
+Author: Kathy Sierra
+Genre: PROGRAMMING
+Avaible: 3
+---
+Id: 978-0-13-110362-7
+Name: The C Programming Language
+Author: Brian W. Kernighan
+Genre: PROGRAMMING
+Avaible: 6
+---
+Id: 978-0-201-83595-3
+Name: The Mythical Man-Month
+Author: Frederick P. Brooks Jr.
+Genre: SOFTWARE
+Avaible: 1
+---
+Id: 978-0-13-235088-4
+Name: Clean Code
+Author: Robert C. Martin
+Genre: SOFTWARE
+Avaible: 7
+---
+Id: 978-0-596-51774-8
+Name: Java Concurrency in Practice
+Author: Brian Goetz
+Genre: PROGRAMMING
+Avaible: 2
+---
+Id: 978-1-59327-599-0
+Name: Automate the Boring Stuff with Python
+Author: Al Sweigart
+Genre: SCRIPTING
+Avaible: 8
+---
+Id: 978-1-4919-1889-0
+Name: Fluent Python
+Author: Luciano Ramalho
+Genre: SCRIPTING
+Avaible: 23
+---
